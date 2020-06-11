@@ -1,0 +1,24 @@
+# permissions for end users to edit apisixupstreams.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: apisixupstreams-editor-role
+rules:
+- apiGroups:
+  - github.com.my.domain
+  resources:
+  - apisixupstreams
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - github.com.my.domain
+  resources:
+  - apisixupstreams/status
+  verbs:
+  - get

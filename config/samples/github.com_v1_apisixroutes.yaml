@@ -1,0 +1,7 @@
+apiVersion: github.com.my.domain/v1
+kind: ApisixRoutes
+metadata:
+  name: apisixroutes-sample
+spec:
+  # Add fields here
+  foo: bar

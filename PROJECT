@@ -1,3 +1,10 @@
 domain: my.domain
 repo: github.com/Miss-you/ingress
+resources:
+- group: github.com
+  kind: ApisixRoutes
+  version: v1
+- group: github.com
+  kind: ApisixUpstreams
+  version: v1
 version: "2"

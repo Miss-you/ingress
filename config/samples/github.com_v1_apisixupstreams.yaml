@@ -1,0 +1,7 @@
+apiVersion: github.com.my.domain/v1
+kind: ApisixUpstreams
+metadata:
+  name: apisixupstreams-sample
+spec:
+  # Add fields here
+  foo: bar
