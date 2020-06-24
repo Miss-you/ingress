@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"networking.k8s.io/v1beta1","kind":"Ingress","metadata":{"annotations":{"nginx.ingress.kubernetes.io/rewrite-target":"/$2"},"name":"rewrite","namespace":"default"},"spec":{"rules":[{"host":"rewrite.bar.com","http":{"paths":[{"backend":{"serviceName":"http","servicePort":80},"path":"/something(/|$)(.*)"}]}}]}}
+    kubernetes.io/ingress.qcloud-loadbalance-id: lb-42j6gi2s
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  creationTimestamp: "2020-06-17T06:10:48Z"
+  generation: 2
+  name: rewrite
+  namespace: default
+  resourceVersion: "3381890389"
+  selfLink: /apis/extensions/v1beta1/namespaces/default/ingresses/rewrite
+  uid: 110cf621-c59c-45d2-9207-f781f98c2bad
+spec:
+  rules:
+  - host: rewrite.bar.com
+    http:
+      paths:
+      - backend:
+          serviceName: http
+          servicePort: 80
+        path: /something(/|$)(.*)
+status:
+  loadBalancer:
+    ingress:
+    - ip: 129.226.99.30
