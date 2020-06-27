@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: ApisixUpstream
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"ingress-nginx","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"ingress-nginx","app.kubernetes.io/version":"0.33.0","helm.sh/chart":"ingress-nginx-2.4.0"},"name":"ingress-nginx-controller","namespace":"ingress-nginx"},"spec":{"externalTrafficPolicy":"Local","ports":[{"name":"http","port":80,"protocol":"TCP","targetPort":"http"},{"name":"https","port":443,"protocol":"TCP","targetPort":"https"}],"selector":{"app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"ingress-nginx","app.kubernetes.io/name":"ingress-nginx"},"type":"LoadBalancer"}}
+    service.kubernetes.io/loadbalance-id: lb-0zkdunhm
+  creationTimestamp: "2020-06-14T17:44:48Z"
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/version: 0.33.0
+    helm.sh/chart: ingress-nginx-2.4.0
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+  resourceVersion: "3324951239"
+  selfLink: /api/v1/namespaces/ingress-nginx/services/ingress-nginx-controller
+  uid: 79954643-1334-458d-bd8f-5012d12ea78e
+spec:
+  serviceRef:
+    apiVersion: v1
+    kind: Service
+    name: ingress-nginx
+    namespace: ingress-nginx
+    resourceVersion: "3565793835"
+    uid: 79954643-1334-458d-bd8f-5012d12ea78e
+   type: Service
+status:
+  nodes: 
+    - host: 11.1.1.1
+    port: 80
+    weight: 100
+    - host: 2.2.2.2
+    port: 80
+    weight: 100
+  retries: 1
+  timeout: 
+    connect: 15
+    send: 15
+    read: 15
+  type: roundrobin  
