@@ -23,19 +23,43 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
+type ApisixRoutesIngressRef struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+}
+
 // ApisixRoutesSpec defines the desired state of ApisixRoutes
 type ApisixRoutesSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
 	// Foo is an example field of ApisixRoutes. Edit ApisixRoutes_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	IngressRef 	ApisixRoutesIngressRef 	`json:"ingressRef"`
+	Type 		string 					`json:"type"`
+}
+
+type ApisixPluginsProxyRewrite struct {
+	Uri 		string 					`json:"uri"`
+	Host 		string 					`json:"host"`
+	Scheme		string 					`json:"scheme"`
+	Headers 	map[string]string		`json:"headers"`
+}
+
+type ApisixPluginsObject struct {
+	ProxyRewrite 	ApisixPluginsProxyRewrite	`json:"proxy-rewrite"`
 }
 
 // ApisixRoutesStatus defines the observed state of ApisixRoutes
 type ApisixRoutesStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+	Uri 				string 					`json:"uri"`
+	Host 				string 					`json:"host"`
+	Priority 			int64					`json:"priority"`
+	Methods 			[]string 				`json:"methods"`
+	Plugins				ApisixPluginsObject 	`json:"plugins"`
+	ServiceProtocol 	string 					`json:"service_protocol"`
+	UpstreamId 			string  				`json:"upstream_id"`
 }
 
 // +kubebuilder:object:root=true
