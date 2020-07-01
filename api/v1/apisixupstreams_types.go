@@ -33,30 +33,30 @@ type ApisixUpstreamsSpec struct {
 	// Important: Run "make" to regenerate code after modifying this file
 
 	// Foo is an example field of ApisixUpstreams. Edit ApisixUpstreams_types.go to remove/update
-	ServiceRef 		ApisixServiceRef	`json:"serviceRef"`
-	Type 			string 				`json:"type"`
+	ServiceRef ApisixServiceRef `json:"serviceRef"`
+	Type       string           `json:"type"`
 }
 
 type ApisixUpstreamNode struct {
-	Host 			string 				`json:"host"`
-	Port 			int64        		`json:"port"`
-	Weight 			int64     			`json:"weight"`
+	Host   string `json:"host"`
+	Port   int64  `json:"port"`
+	Weight int64  `json:"weight"`
 }
 
 type ApisixUpstreamTimeout struct {
-	Connect 		int64           	`json:"connect"`
-	Send 			int64 				`json:"send"`
-	Read 			int64				`json:"read"`
+	Connect int64 `json:"connect"`
+	Send    int64 `json:"send"`
+	Read    int64 `json:"read"`
 }
 
 // ApisixUpstreamsStatus defines the observed state of ApisixUpstreams
 type ApisixUpstreamsStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
-	Nodes 			[]ApisixUpstreamNode 	`json:"nodes"`
-	Retries 		int64 					`json:"retries"`
-	Type 			string 					`json:"type"`
-	Timeout			ApisixUpstreamTimeout	`json:"timeout"`
+	Nodes   []ApisixUpstreamNode  `json:"nodes"`
+	Retries int64                 `json:"retries"`
+	Type    string                `json:"type"`
+	Timeout ApisixUpstreamTimeout `json:"timeout"`
 }
 
 // +kubebuilder:object:root=true
