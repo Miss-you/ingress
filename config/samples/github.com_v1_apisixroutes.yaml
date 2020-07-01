@@ -5,3 +5,11 @@ metadata:
 spec:
   # Add fields here
   foo: bar
+  ingressRef:
+    apiVersion: extensions/v1beta1
+    kind: Ingress
+    name: rewrite
+    namespace: default
+    resourceVersion: "3381890389"
+    uid: 110cf621-c59c-45d2-9207-f781f98c2bad
+  type: Ingress
