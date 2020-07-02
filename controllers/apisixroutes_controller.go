@@ -18,6 +18,7 @@ package controllers
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-logr/logr"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -25,6 +26,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	githubcomv1 "github.com/Miss-you/ingress/api/v1"
+	extensions "k8s.io/api/extensions/v1beta1"
 )
 
 // ApisixRoutesReconciler reconciles a ApisixRoutes object
@@ -36,12 +38,36 @@ type ApisixRoutesReconciler struct {
 
 // +kubebuilder:rbac:groups=github.com.my.domain,resources=apisixroutes,verbs=get;list;watch;create;update;patch;delete
 // +kubebuilder:rbac:groups=github.com.my.domain,resources=apisixroutes/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=extensions,resources=ingress,verbs=get;list;watch;create;update;patch;delete
 
 func (r *ApisixRoutesReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
-	_ = context.Background()
-	_ = r.Log.WithValues("apisixroutes", req.NamespacedName)
+	ctx := context.Background()
+	log := r.Log.WithValues("apisixroutes", req.NamespacedName)
 
 	// your logic here
+	//get and print
+	var ingressObj extensions.Ingress
+	fmt.Println("req.NamespacedName: ", req.NamespacedName)
+	if err := r.Get(ctx, req.NamespacedName, &ingressObj); err != nil {
+		log.Error(err, "unable to fetch ingressObj")
+		// we'll ignore not-found errors, since they can't be fixed by an immediate
+		// requeue (we'll need to wait for a new notification), and we can get them
+		// on deleted requests.
+		return ctrl.Result{}, client.IgnoreNotFound(err)
+	}
+
+	fmt.Println(ingressObj)
+
+	var apisixRoute githubcomv1.ApisixRoutes
+	if err := r.Get(ctx, req.NamespacedName, &apisixRoute); err != nil {
+		log.Error(err, "unable to fetch apisixRoute")
+		// we'll ignore not-found errors, since they can't be fixed by an immediate
+		// requeue (we'll need to wait for a new notification), and we can get them
+		// on deleted requests.
+		return ctrl.Result{}, client.IgnoreNotFound(err)
+	}
+
+	fmt.Println(apisixRoute)
 
 	return ctrl.Result{}, nil
 }

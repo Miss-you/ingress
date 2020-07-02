@@ -74,14 +74,16 @@ func main() {
 		setupLog.Error(err, "unable to create controller", "controller", "ApisixRoutes")
 		os.Exit(1)
 	}
-	if err = (&controllers.ApisixUpstreamsReconciler{
-		Client: mgr.GetClient(),
-		Log:    ctrl.Log.WithName("controllers").WithName("ApisixUpstreams"),
-		Scheme: mgr.GetScheme(),
-	}).SetupWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create controller", "controller", "ApisixUpstreams")
-		os.Exit(1)
-	}
+	/*
+		if err = (&controllers.ApisixUpstreamsReconciler{
+			Client: mgr.GetClient(),
+			Log:    ctrl.Log.WithName("controllers").WithName("ApisixUpstreams"),
+			Scheme: mgr.GetScheme(),
+		}).SetupWithManager(mgr); err != nil {
+			setupLog.Error(err, "unable to create controller", "controller", "ApisixUpstreams")
+			os.Exit(1)
+		}
+	*/
 	// +kubebuilder:scaffold:builder
 
 	setupLog.Info("starting manager")
